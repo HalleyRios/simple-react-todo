@@ -1,0 +1,49 @@
+@import-normalize;
+
+* {
+    /* outline: 1px dashed darkred; */
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS43WtuWrhfBvapywCjmOCoCypafBkzzhaHc0QpS_fcHX1jipeN')
+        no-repeat center;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    color: #3a3a3a;
+}
+
+main {
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 30px;
+}
+
+@media (max-width: 576px) {
+    body {
+        padding: 0 1em;
+    }
+
+    button {
+        background: transparent;
+        height: 50px;
+        width: 50px;
+        .fas {
+            font-size: 1.5rem;
+        }
+    }
+}

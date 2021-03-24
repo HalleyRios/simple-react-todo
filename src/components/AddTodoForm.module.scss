@@ -1,0 +1,29 @@
+.add-todo-form {
+    margin: 20px 0;
+    display: block;
+    height: 40px;
+
+    input,
+    button {
+        display: block;
+        float: left;
+        height: 40px;
+        width: 90%;
+        border-radius: 5px 0px 0px 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        text-indent: 10px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    button {
+        width: 10%;
+        background: #42a5f5;
+        border-color: #42a5f5;
+        color: #fff;
+        text-indent: 0px;
+        border-radius: 0px 5px 5px 0px;
+        cursor: pointer;
+    }
+}
