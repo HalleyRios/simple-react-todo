@@ -29,7 +29,7 @@ function AddTodoForm(props) {
                     required
                 />
                 <button id='btnCreateTask' type='submit'>
-                    <i className='fas fa-plus'></i>
+                    <i className='fas fa-plus' />
                 </button>
             </form>
         </section>
