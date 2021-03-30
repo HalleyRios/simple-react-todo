@@ -6,11 +6,11 @@ import { TodosContextProvider } from './store/todos-context';
 //import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-    <TodosContextProvider>
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>
-    </TodosContextProvider>,
+    <React.StrictMode>
+        <TodosContextProvider>
+            <App/>
+        </TodosContextProvider>
+    </React.StrictMode>,
     document.getElementById('root')
 );
 

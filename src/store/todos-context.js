@@ -20,7 +20,13 @@ export function TodosContextProvider(props) {
         }
     }
 
-    function editTaskHandler(task) {}
+    function editTaskHandler(task) {
+        if (hasTaskHandler(task.id)) {
+            setTasks((previousTasks) => {
+               return previousTasks.map((previousTask) => task.id === previousTask.id ? task : previousTask);
+            });
+        }
+    }
 
     function removeTaskHandler(taskId) {
         if (hasTaskHandler(taskId)) {
