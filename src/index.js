@@ -2,14 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
-import { TodosContextProvider } from './store/todos-context';
 //import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
     <React.StrictMode>
-        <TodosContextProvider>
-            <App/>
-        </TodosContextProvider>
+        <App/>
     </React.StrictMode>,
     document.getElementById('root')
 );

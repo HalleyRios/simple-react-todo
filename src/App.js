@@ -10,11 +10,14 @@ function App() {
         isLoading: false,
         tasks: [],
     });
-    let content = appState.isLoading ? (
-        <p>Loading...</p>
-    ) : (
-        <TodoList tasks={appState.tasks} />
-    );
+
+    function getContent() {
+        return appState.isLoading ? (
+            <p>Loading...</p>
+        ) : (
+            appState.tasks.length ? <TodoList tasks={appState.tasks} /> : <p>Empty State</p>
+        );
+    }
 
     function addTodoHandler(newTodo) {
         fetch('https://5df94eace9f79e0014b6afab.mockapi.io/api/v1/tasks', {
@@ -23,8 +26,15 @@ function App() {
             headers: {
                 'Content-Type': 'application/json',
             },
-        }).then((res) => {
-            console.log(res);
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            setAppState((prevState) => {
+                return {
+                    tasks: prevState.tasks.concat(data),
+                    isLoading: false,
+                };
+            });
         });
     }
 
@@ -51,13 +61,13 @@ function App() {
                     tasks,
                 });
             });
-    }, [setAppState]);
+    }, []);
 
     return (
         <main>
             <h1>Todo List</h1>
             <AddTodoForm onAddTodo={addTodoHandler} />
-            {content}
+            {getContent()}
         </main>
     );
 }
