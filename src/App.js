@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 
 import AddTodoForm from './components/AddTodoForm';
 import TodoList from './components/TodoList';
-
-//https://5df94eace9f79e0014b6afab.mockapi.io/api/v1/tasks
+import TodoService from "./services/TodoService";
 
 function App() {
     const [appState, setAppState] = useState({
@@ -20,15 +19,8 @@ function App() {
     }
 
     function addTodoHandler(newTodo) {
-        fetch('https://5df94eace9f79e0014b6afab.mockapi.io/api/v1/tasks', {
-            method: 'POST',
-            body: JSON.stringify(newTodo),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then((res) => res.json())
-        .then((data) => {
+        const todoService = new TodoService();
+        todoService.addNewTask(newTodo).then((data) => {
             setAppState((prevState) => {
                 return {
                     tasks: prevState.tasks.concat(data),
@@ -39,28 +31,25 @@ function App() {
     }
 
     useEffect(() => {
+        const todoService = new TodoService();
         setAppState({ isLoading: true });
-        fetch('https://5df94eace9f79e0014b6afab.mockapi.io/api/v1/tasks')
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                const tasks = [];
-                for (const key in data) {
-                    if (Object.hasOwnProperty.call(data, key)) {
-                        const task = {
-                            id: key,
-                            ...data[key],
-                        };
-                        tasks.push(task);
-                    }
+        todoService.getTasks().then((data) => {
+            const tasks = [];
+            for (const key in data) {
+                if (Object.hasOwnProperty.call(data, key)) {
+                    const task = {
+                        id: key,
+                        ...data[key],
+                    };
+                    tasks.push(task);
                 }
+            }
 
-                setAppState({
-                    isLoading: false,
-                    tasks,
-                });
+            setAppState({
+                isLoading: false,
+                tasks,
             });
+        });
     }, []);
 
     return (

@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import styles from './TodoList.module.scss';
+import TodoService from "../services/TodoService";
 
 function TodoItem(props) {
     const [state, setState] = useState({
@@ -25,19 +26,8 @@ function TodoItem(props) {
     }
 
     function updateTodo(newData) {
-        fetch('https://5df94eace9f79e0014b6afab.mockapi.io/api/v1/tasks/' + state.id, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                createdAt: newData.createdAt,
-                done: newData.done,
-                id: newData.id,
-                isDone: newData.isDone,
-                title: newData.title,
-            })
-        }).then((data) => {
+        const todoService = new TodoService();
+        todoService.updateTask(state.id, newData).then((data) => {
             switch (data.status) {
                 case 200:
                     setState({
